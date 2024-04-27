@@ -57,7 +57,7 @@ function Pizza({ pizza }) {
   const { soldOut } = pizza;
   return (
     <li className={!soldOut ? "pizza" : "pizza sold-out"}>
-      <img src={pizza.photoName} alt="Pizza spinaci"></img>
+      <img src={pizza.photoName} alt={pizza.name}></img>
       <div>
         <h3>{pizza.name}</h3>
         <p>{pizza.ingredients}</p>
