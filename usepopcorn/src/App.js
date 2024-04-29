@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import { tempMovieData, tempWatchedData } from "./data";
 import { useState } from "react";
 import { Main, Movies, WatchedMovies } from "./components/Main";
+import StarRating from "./components/StarRating";
 
 export const average = (array) =>
   array.reduce((acc, curr) => (acc = acc + curr), 0) / array.length;
@@ -15,8 +16,9 @@ function App() {
     <>
       <NavBar numResults={movies.length}></NavBar>
       <Main>
-        <Movies movies={movies} />
-        <WatchedMovies watchedMovies={watchedMovies} />
+        {/* <Movies movies={movies} /> */}
+        <StarRating starsCount={10}></StarRating>
+        {/* <WatchedMovies watchedMovies={watchedMovies} /> */}
       </Main>
     </>
   );
