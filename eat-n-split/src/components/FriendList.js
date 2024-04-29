@@ -1,39 +1,21 @@
-const friends = [
-  {
-    id: 118836,
-    name: "Clark",
-    image: "https://i.pravatar.cc/48?u=118836",
-    balance: -7,
-  },
-  {
-    id: 933372,
-    name: "Sarah",
-    image: "https://i.pravatar.cc/48?u=933372",
-    balance: 20,
-  },
-  {
-    id: 499476,
-    name: "Anthony",
-    image: "https://i.pravatar.cc/48?u=499476",
-    balance: 0,
-  },
-];
-
-export default function FriendList() {
+export default function FriendList({ friends, selected, handleSelect }) {
   return (
-    <div className="sidebar">
-      <ul>
-        {friends.map((friend) => (
-          <Friend friend={friend} />
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {friends.map((friend) => (
+        <Friend
+          friend={friend}
+          key={friend.id}
+          selected={selected}
+          onSelect={handleSelect}
+        />
+      ))}
+    </ul>
   );
 }
 
-function Friend({ friend }) {
+function Friend({ friend, selected, onSelect }) {
   return (
-    <li>
+    <li className={selected === friend ? "selected" : ""}>
       <h3>{friend.name}</h3>
       <img src={friend.image} alt={friend.name} />
       {friend.balance === 0 ? (
@@ -48,7 +30,14 @@ function Friend({ friend }) {
         </p>
       )}
 
-      <button className="button">Select</button>
+      <button
+        className="button"
+        onClick={() => {
+          onSelect((selected) => (selected === friend ? null : friend));
+        }}
+      >
+        {selected === friend ? "Close" : "Open"}
+      </button>
     </li>
   );
 }
