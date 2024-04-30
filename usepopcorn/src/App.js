@@ -16,9 +16,14 @@ function App() {
     <>
       <NavBar numResults={movies.length}></NavBar>
       <Main>
-        {/* <Movies movies={movies} /> */}
-        <StarRating starsCount={10}></StarRating>
-        {/* <WatchedMovies watchedMovies={watchedMovies} /> */}
+        <Movies movies={movies} />
+        <StarRating
+          starsCount={3}
+          messages={["bad", "good", "very good"]}
+          size={24}
+          defaultRating={2}
+        ></StarRating>
+        <WatchedMovies watchedMovies={watchedMovies} />
       </Main>
     </>
   );

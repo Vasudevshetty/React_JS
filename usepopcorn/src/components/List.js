@@ -21,11 +21,14 @@ function Movie({ type, movie }) {
             <span>{movie.Year}</span>
           </p>
         ) : (
-          <Stats
-            imdb={movie.imdbRating}
-            user={movie.userRating}
-            runtime={movie.runtime}
-          />
+          <>
+            <Stats
+              imdb={movie.imdbRating}
+              user={movie.userRating}
+              runtime={movie.runtime}
+            />
+            <button className="btn-delete">&times;</button>
+          </>
         )}
       </div>
     </li>
