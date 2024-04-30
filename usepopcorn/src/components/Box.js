@@ -2,7 +2,13 @@ import ToggleButton from "./ToggleButton";
 import List from "./List";
 import { useState } from "react";
 
-export default function Box({ type, movies, children }) {
+export default function Box({
+  type = "",
+  movies = null,
+  onSelect,
+  className,
+  children,
+}) {
   const [open, setOpen] = useState(true);
 
   return (
@@ -11,9 +17,17 @@ export default function Box({ type, movies, children }) {
       {open && (
         <>
           {children}
-          <List type={type} movies={movies}></List>
+          {movies && (
+            <List
+              type={type}
+              movies={movies}
+              onSelect={onSelect}
+              className={className}
+            />
+          )}
         </>
       )}
     </div>
   );
 }
+

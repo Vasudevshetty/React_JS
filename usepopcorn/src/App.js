@@ -1,32 +1,34 @@
 import "./index.css";
 import NavBar from "./components/NavBar";
-import { tempMovieData, tempWatchedData } from "./data";
 import { useState } from "react";
-import { Main, Movies, WatchedMovies } from "./components/Main";
-import StarRating from "./components/StarRating";
-
-export const average = (array) =>
-  array.reduce((acc, curr) => (acc = acc + curr), 0) / array.length;
+import { Main, Movies, WatchedMovies, Details } from "./components/Main";
 
 function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watchedMovies, setWatchedMovies] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [watchedMovies, setWatchedMovies] = useState([]);
 
   return (
     <>
-      <NavBar numResults={movies.length}></NavBar>
+      <NavBar numResults={movies?.length} onQuery={setMovies}></NavBar>
       <Main>
-        <Movies movies={movies} />
-        <StarRating
-          starsCount={3}
-          messages={["bad", "good", "very good"]}
-          size={24}
-          defaultRating={2}
-        ></StarRating>
-        <WatchedMovies watchedMovies={watchedMovies} />
+        <Movies movies={movies} onSelect={setSelectedMovie} />
+        {!selectedMovie ? (
+          <WatchedMovies watchedMovies={watchedMovies} />
+        ) : (
+          <Details movie={selectedMovie} onBack={setSelectedMovie} />
+        )}
       </Main>
     </>
   );
 }
 
 export default App;
+
+// async function getJSON(url) {
+//   try {
+//     const response = await fetch(url);
+//   } catch (err) {
+//     throw err;
+//   }
+// }

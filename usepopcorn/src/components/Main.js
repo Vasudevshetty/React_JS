@@ -1,12 +1,24 @@
 import Box from "./Box";
 import { Stats } from "./List";
-import { average } from "../App";
+import Detail from "./Detail";
+
+const average = (array) =>
+  !array
+    ? array.reduce((acc, curr) => (acc = acc + curr), 0) / array.length
+    : 0;
 
 export function Main({ children }) {
   return <main className="main">{children}</main>;
 }
-export function Movies({ movies }) {
-  return <Box type="queryMovies" movies={movies} />;
+export function Movies({ movies, onSelect }) {
+  return (
+    <Box
+      type="queryMovies"
+      movies={movies}
+      onSelect={onSelect}
+      className="list-movies"
+    />
+  );
 }
 export function WatchedMovies({ watchedMovies }) {
   const imdbAvg = average(watchedMovies.map((movie) => movie.imdbRating));
@@ -25,6 +37,14 @@ export function WatchedMovies({ watchedMovies }) {
           <Stats imdb={imdbAvg} user={userAvg} runtime={runtimeAvg} />
         </div>
       </div>
+    </Box>
+  );
+}
+
+export function Details({ movie, onBack }) {
+  return (
+    <Box>
+      <Detail movie={movie} onBack={onBack} />
     </Box>
   );
 }

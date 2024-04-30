@@ -1,16 +1,35 @@
-export default function List({ type, movies }) {
+import { getJSON, selectURL } from "../data";
+
+export default function List({ type, movies, onSelect, className }) {
   return (
-    <ul className="list">
+    <ul className={`list ${className}`}>
       {movies?.map((movie) => (
-        <Movie type={type} movie={movie} key={movie.imdbID}></Movie>
+        <Movie
+          type={type}
+          movie={movie}
+          key={movie.imdbID}
+          onSelect={onSelect}
+        ></Movie>
       ))}
     </ul>
   );
 }
 
-function Movie({ type, movie }) {
+function Movie({ type, movie, onSelect }) {
+  async function handleSelect() {
+    try {
+      const data = await getJSON(selectURL(movie.imdbID));
+      if (!data) return;
+      onSelect((selectedMovie) =>
+        selectedMovie?.imdbID === data.imdbID ? null : data
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
-    <li>
+    <li onClick={() => handleSelect()}>
       <img src={movie.Poster} alt={movie.Title + "poster"} />
       <h3>{movie.Title}</h3>
 
