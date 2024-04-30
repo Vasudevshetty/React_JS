@@ -13,9 +13,9 @@ export function FormSplit({ selectedFriend, onSplitBill }) {
 
     onSplitBill(balance);
 
-    setBill(0);
-    setUserExp(0);
-    setPayBy("user");
+    // setBill(0);
+    // setUserExp(0);
+    // setPayBy("user");
   }
 
   return (
