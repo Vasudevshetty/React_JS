@@ -2,7 +2,7 @@ import "./index.css";
 import NavBar from "./components/NavBar";
 import { useState } from "react";
 import { Main } from "./components/Main";
-import { Details } from "./components/Details";
+import Details from "./components/Details";
 import { WatchedMovies } from "./components/WatchedMovies";
 import { Movies } from "./components/Movies";
 
@@ -28,12 +28,17 @@ function App() {
           onLoading={setDetailLoaded}
         />
         {!detailLoaded && !selectedMovie ? (
-          <WatchedMovies watchedMovies={watchedMovies} />
+          <WatchedMovies
+            watchedMovies={watchedMovies}
+            onDelete={setWatchedMovies}
+          />
         ) : (
           <Details
             movie={selectedMovie}
             onBack={setSelectedMovie}
             loaded={detailLoaded}
+            onWatched={setWatchedMovies}
+            onListed={setSelectedMovie}
           />
         )}
       </Main>
@@ -42,11 +47,3 @@ function App() {
 }
 
 export default App;
-
-// async function getJSON(url) {
-//   try {
-//     const response = await fetch(url);
-//   } catch (err) {
-//     throw err;
-//   }
-// }

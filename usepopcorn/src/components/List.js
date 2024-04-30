@@ -1,15 +1,21 @@
 import { getJSON, selectURL } from "../data";
-import Loader from "./Loader";
 
 export default function List({
   type,
   movies,
   onSelect,
+  onReselect,
+  onDelete,
   className,
-  loaded,
   onLoading,
 }) {
-  return !loaded ? (
+  function handleDelete(movie) {
+    onDelete((watchedMovies) =>
+      watchedMovies.filter((watchedMovie) => watchedMovie !== movie)
+    );
+  }
+
+  return (
     <ul className={`list ${className}`}>
       {movies?.map((movie) => (
         <Movie
@@ -17,17 +23,18 @@ export default function List({
           movie={movie}
           key={movie.imdbID}
           onSelect={onSelect}
+          onReselect={onReselect}
           onLoading={onLoading}
+          onDelete={handleDelete}
         ></Movie>
       ))}
     </ul>
-  ) : (
-    <Loader />
   );
 }
 
-function Movie({ type, movie, onSelect, onLoading }) {
+function Movie({ type, movie, onSelect, onLoading, onDelete }) {
   async function handleSelect() {
+    if (type !== "queryMovies") return;
     try {
       onLoading(true);
       const data = await getJSON(selectURL(movie.imdbID));
@@ -57,9 +64,11 @@ function Movie({ type, movie, onSelect, onLoading }) {
             <Stats
               imdb={movie.imdbRating}
               user={movie.userRating}
-              runtime={movie.runtime}
+              runtime={movie.Runtime}
             />
-            <button className="btn-delete">&times;</button>
+            <button className="btn-delete" onClick={() => onDelete(movie)}>
+              &times;
+            </button>
           </>
         )}
       </div>
@@ -80,7 +89,7 @@ export function Stats({ imdb, user, runtime }) {
       </p>
       <p>
         <span>⏳</span>
-        <span>{runtime} min</span>
+        <span>{runtime}</span>
       </p>
     </>
   );

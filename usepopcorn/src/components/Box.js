@@ -7,6 +7,7 @@ export default function Box({
   movies = null,
   onSelect,
   onLoading,
+  onDelete,
   className,
   children,
 }) {
@@ -25,6 +26,7 @@ export default function Box({
               onSelect={onSelect}
               onLoading={onLoading}
               className={className}
+              onDelete={onDelete}
             />
           )}
         </>

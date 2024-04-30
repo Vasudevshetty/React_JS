@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getJSON, searchURL } from "../data";
 
-export default function NavBar({ numResults, onQuery, onLoading }) {
+export default function NavBar({ numResults = 0, onQuery, onLoading }) {
   return (
     <nav className="nav-bar">
       <Logo></Logo>
