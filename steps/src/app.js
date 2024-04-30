@@ -30,7 +30,15 @@ export default function App() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      <TextExpander expanded={true} className="box">
+      <TextExpander
+        expanded={true}
+        styles={{
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "7px",
+          backgroundColor: "#f7f7f7",
+        }}
+      >
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
