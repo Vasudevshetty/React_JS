@@ -6,6 +6,7 @@ export default function Box({
   type = "",
   movies = null,
   onSelect,
+  onLoading,
   className,
   children,
 }) {
@@ -22,6 +23,7 @@ export default function Box({
               type={type}
               movies={movies}
               onSelect={onSelect}
+              onLoading={onLoading}
               className={className}
             />
           )}
@@ -30,4 +32,3 @@ export default function Box({
     </div>
   );
 }
-

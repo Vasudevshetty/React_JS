@@ -1,7 +1,15 @@
 import { getJSON, selectURL } from "../data";
+import Loader from "./Loader";
 
-export default function List({ type, movies, onSelect, className }) {
-  return (
+export default function List({
+  type,
+  movies,
+  onSelect,
+  className,
+  loaded,
+  onLoading,
+}) {
+  return !loaded ? (
     <ul className={`list ${className}`}>
       {movies?.map((movie) => (
         <Movie
@@ -9,17 +17,22 @@ export default function List({ type, movies, onSelect, className }) {
           movie={movie}
           key={movie.imdbID}
           onSelect={onSelect}
+          onLoading={onLoading}
         ></Movie>
       ))}
     </ul>
+  ) : (
+    <Loader />
   );
 }
 
-function Movie({ type, movie, onSelect }) {
+function Movie({ type, movie, onSelect, onLoading }) {
   async function handleSelect() {
     try {
+      onLoading(true);
       const data = await getJSON(selectURL(movie.imdbID));
       if (!data) return;
+      onLoading(false);
       onSelect((selectedMovie) =>
         selectedMovie?.imdbID === data.imdbID ? null : data
       );

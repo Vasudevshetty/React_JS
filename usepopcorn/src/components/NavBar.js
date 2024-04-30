@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { getJSON, searchURL } from "../data";
 
-export default function NavBar({ numResults, onQuery }) {
+export default function NavBar({ numResults, onQuery, onLoading }) {
   return (
     <nav className="nav-bar">
       <Logo></Logo>
-      <Search onQuery={onQuery} />
+      <Search onQuery={onQuery} onLoading={onLoading} />
       <p className="num-results">
         Found <strong>{numResults}</strong> results
       </p>
@@ -22,13 +22,15 @@ function Logo() {
   );
 }
 
-function Search({ onQuery }) {
+function Search({ onQuery, onLoading }) {
   const [query, setQuery] = useState("");
 
   async function handleSearch() {
     try {
+      onLoading(true);
       const data = await getJSON(searchURL(query));
       if (!data) return;
+      onLoading(false);
       onQuery(data.Search);
     } catch (err) {
       console.log(err);
