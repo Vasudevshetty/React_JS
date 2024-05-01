@@ -39,6 +39,7 @@ function App() {
             loaded={detailLoaded}
             onWatched={setWatchedMovies}
             onListed={setSelectedMovie}
+            watchedMovies={watchedMovies}
           />
         )}
       </Main>

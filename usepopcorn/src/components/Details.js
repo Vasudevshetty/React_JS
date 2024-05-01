@@ -8,6 +8,7 @@ export default function Details({
   onBack,
   loaded,
   onWatched,
+  watchedMovies,
   onListed,
 }) {
   return (
@@ -18,6 +19,7 @@ export default function Details({
           onBack={onBack}
           onWatched={onWatched}
           onListed={onListed}
+          watchedMovies={watchedMovies}
         />
       ) : (
         <Loader />
@@ -26,12 +28,17 @@ export default function Details({
   );
 }
 
-function Detail({ movie, onBack, onWatched, onListed }) {
+function Detail({ movie, onBack, onWatched, onListed, watchedMovies }) {
   if (!movie) return;
   return (
     <div className="details">
       <Header movie={movie} onBack={onBack} />
-      <Section movie={movie} onWatched={onWatched} onListed={onListed} />
+      <Section
+        movie={movie}
+        onWatched={onWatched}
+        onListed={onListed}
+        watchedMovies={watchedMovies}
+      />
     </div>
   );
 }
@@ -63,7 +70,7 @@ function OverView({ movie }) {
   );
 }
 
-function Section({ movie, onWatched, onListed }) {
+function Section({ movie, onWatched, onListed, watchedMovies }) {
   const [rating, setRating] = useState(0);
 
   function handleWatched() {
@@ -77,7 +84,19 @@ function Section({ movie, onWatched, onListed }) {
   return (
     <section>
       <div className="rating">
-        <StarRating starsCount={10} size={24} onSetRating={setRating} />
+        {!watchedMovies.map((movie) => movie.imdbID).includes(movie.imdbID) ? (
+          <StarRating starsCount={10} size={24} onSetRating={setRating} />
+        ) : (
+          <p>
+            You rated this movie with{" "}
+            {
+              watchedMovies.find(
+                (watchedMovie) => watchedMovie.imdbID === movie.imdbID
+              )?.userRating
+            }
+            ⭐
+          </p>
+        )}
         {rating > 0 && (
           <button className="btn-add" onClick={handleWatched}>
             + Add to list

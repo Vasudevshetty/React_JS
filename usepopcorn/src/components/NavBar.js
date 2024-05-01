@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getJSON, searchURL } from "../data";
 
 export default function NavBar({ numResults = 0, onQuery, onLoading }) {
@@ -25,17 +25,24 @@ function Logo() {
 function Search({ onQuery, onLoading }) {
   const [query, setQuery] = useState("");
 
-  async function handleSearch() {
-    try {
-      onLoading(true);
-      const data = await getJSON(searchURL(query));
-      if (!data) return;
-      onLoading(false);
-      onQuery(data.Search);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  useEffect(
+    function () {
+      async function handleSearch() {
+        try {
+          onLoading(true);
+          const data = await getJSON(searchURL(query));
+          if (!data) return;
+          onLoading(false);
+          onQuery(data.Search);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      handleSearch();
+    },
+    [query, onLoading, onQuery]
+  );
 
   return (
     <>
@@ -46,7 +53,6 @@ function Search({ onQuery, onLoading }) {
         placeholder="Search movies..."
         onChange={(e) => {
           setQuery(e.target.value);
-          handleSearch();
         }}
       />
     </>
