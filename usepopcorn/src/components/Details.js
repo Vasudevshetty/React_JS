@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Box from "./Box";
-import Loader from "./Loader";
+import { Loader } from "./Loader";
 import StarRating from "./StarRating";
 
 export default function Details({
@@ -11,20 +10,16 @@ export default function Details({
   watchedMovies,
   onListed,
 }) {
-  return (
-    <Box>
-      {!loaded ? (
-        <Detail
-          movie={movie}
-          onBack={onBack}
-          onWatched={onWatched}
-          onListed={onListed}
-          watchedMovies={watchedMovies}
-        />
-      ) : (
-        <Loader />
-      )}
-    </Box>
+  return !loaded ? (
+    <Detail
+      movie={movie}
+      onBack={onBack}
+      onWatched={onWatched}
+      onListed={onListed}
+      watchedMovies={watchedMovies}
+    />
+  ) : (
+    <Loader />
   );
 }
 

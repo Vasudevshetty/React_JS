@@ -1,6 +1,7 @@
 import ToggleButton from "./ToggleButton";
-import List from "./List";
+import MoviesList from "./MoviesList";
 import { useState } from "react";
+import { Error } from "./Loader";
 
 export default function Box({
   type = "",
@@ -10,6 +11,8 @@ export default function Box({
   onDelete,
   className,
   children,
+  onError,
+  error,
 }) {
   const [open, setOpen] = useState(true);
 
@@ -19,15 +22,20 @@ export default function Box({
       {open && (
         <>
           {children}
-          {movies && (
-            <List
-              type={type}
-              movies={movies}
-              onSelect={onSelect}
-              onLoading={onLoading}
-              className={className}
-              onDelete={onDelete}
-            />
+          {!error ? (
+            (movies || type === "watchedMovies") && (
+              <MoviesList
+                type={type}
+                movies={movies}
+                onSelect={onSelect}
+                onLoading={onLoading}
+                className={className}
+                onDelete={onDelete}
+                onError={onError}
+              />
+            )
+          ) : (
+            <Error message={error} />
           )}
         </>
       )}

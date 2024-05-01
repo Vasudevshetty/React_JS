@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { getJSON, searchURL } from "../data";
 
-export default function NavBar({ numResults = 0, onQuery, onLoading }) {
+export default function NavBar({
+  numResults = 0,
+  onQuery,
+  onLoading,
+  onError,
+}) {
   return (
     <nav className="nav-bar">
       <Logo></Logo>
-      <Search onQuery={onQuery} onLoading={onLoading} />
+      <Search onQuery={onQuery} onLoading={onLoading} onError={onError} />
       <p className="num-results">
         Found <strong>{numResults}</strong> results
       </p>
@@ -22,7 +27,7 @@ function Logo() {
   );
 }
 
-function Search({ onQuery, onLoading }) {
+function Search({ onQuery, onLoading, onError }) {
   const [query, setQuery] = useState("");
 
   useEffect(
@@ -35,13 +40,15 @@ function Search({ onQuery, onLoading }) {
           onLoading(false);
           onQuery(data.Search);
         } catch (err) {
-          console.log(err);
+          onError(err.message);
+        } finally {
+          onLoading(false);
         }
       }
 
       handleSearch();
     },
-    [query, onLoading, onQuery]
+    [query, onLoading, onQuery, onError]
   );
 
   return (

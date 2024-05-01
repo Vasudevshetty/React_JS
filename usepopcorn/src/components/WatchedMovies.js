@@ -1,17 +1,14 @@
-import Box from "./Box";
-import { Stats } from "./List";
+import { Stats } from "./MoviesList";
 
 const average = (array) =>
-  array.length ? (array.reduce((acc, curr) => (acc = acc + curr), 0) / array.length).toFixed(
-    2
-  ) : 0;
+  array.length
+    ? (
+        array.reduce((acc, curr) => (acc = acc + curr), 0) / array.length
+      ).toFixed(2)
+    : 0;
 
-export function WatchedMovies({ watchedMovies, onDelete }) {
-  return (
-    <Box movies={watchedMovies} onDelete={onDelete}>
-      <Summary watchedMovies={watchedMovies} />
-    </Box>
-  );
+export function WatchedMovies({ watchedMovies }) {
+  return <Summary watchedMovies={watchedMovies} />;
 }
 
 function Summary({ watchedMovies }) {

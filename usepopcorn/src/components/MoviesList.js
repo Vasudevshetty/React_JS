@@ -1,6 +1,6 @@
 import { getJSON, selectURL } from "../data";
 
-export default function List({
+export default function MoviesList({
   type,
   movies,
   onSelect,
@@ -8,6 +8,7 @@ export default function List({
   onDelete,
   className,
   onLoading,
+  onError,
 }) {
   function handleDelete(movie) {
     onDelete((watchedMovies) =>
@@ -26,13 +27,14 @@ export default function List({
           onReselect={onReselect}
           onLoading={onLoading}
           onDelete={handleDelete}
-        ></Movie>
+          onError={onError}
+        />
       ))}
     </ul>
   );
 }
 
-function Movie({ type, movie, onSelect, onLoading, onDelete }) {
+function Movie({ type, movie, onSelect, onLoading, onDelete, onError }) {
   async function handleSelect() {
     if (type !== "queryMovies") return;
     try {
@@ -44,7 +46,9 @@ function Movie({ type, movie, onSelect, onLoading, onDelete }) {
         selectedMovie?.imdbID === data.imdbID ? null : data
       );
     } catch (err) {
-      console.log(err);
+      onError(err.message);
+    } finally {
+      onLoading(false);
     }
   }
 
@@ -52,14 +56,15 @@ function Movie({ type, movie, onSelect, onLoading, onDelete }) {
     <li onClick={() => handleSelect()}>
       <img src={movie.Poster} alt={movie.Title + "poster"} />
       <h3>{movie.Title}</h3>
-
+      {console.log(type)}
       <div>
-        {type === "queryMovies" ? (
+        {type === "queryMovies" && (
           <p>
             <span>🗓️</span>
             <span>{movie.Year}</span>
           </p>
-        ) : (
+        )}
+        {type === "watchedMovies" && (
           <>
             <Stats
               imdb={movie.imdbRating}
