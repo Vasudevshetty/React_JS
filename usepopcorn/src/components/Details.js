@@ -93,14 +93,9 @@ function Section({ movie, onWatched, onListed, watchedMovies }) {
 
   return (
     <section>
-      <div className="rating">
+      <div className="rating" ref={stars}>
         {!watchedMovies.map((movie) => movie.imdbID).includes(movie.imdbID) ? (
-          <StarRating
-            starsCount={10}
-            size={24}
-            onSetRating={setRating}
-            ref={stars}
-          />
+          <StarRating starsCount={10} size={24} onSetRating={setRating} />
         ) : (
           <p>
             You rated this movie with{" "}

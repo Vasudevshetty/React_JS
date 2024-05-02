@@ -65,6 +65,7 @@ function Search({ onQuery, onLoading, onError, onNewQuery }) {
       if (query.length < 3) {
         onQuery([]);
         onError("");
+        onError("Search for movies");
         return;
       }
 
