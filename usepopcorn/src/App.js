@@ -7,14 +7,15 @@ import { WatchedMovies } from "./components/WatchedMovies";
 import Box from "./components/Box";
 import { Movies } from "./components/Movies";
 import { Error } from "./components/Loader";
+import useLocalStorage from "./components/useLocalStorage";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [watchedMovies, setWatchedMovies] = useState([]);
   const [searchLoaded, setSearchLoaded] = useState(false);
   const [detailLoaded, setDetailLoaded] = useState(false);
   const [error, setError] = useState("");
+  const [watchedMovies, setWatchedMovies] = useLocalStorage();
 
   return (
     <>

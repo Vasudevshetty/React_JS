@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getJSON, searchURL } from "../data";
+import useKey from "./useKey";
 
 export default function NavBar({
   numResults = 0,
@@ -35,6 +36,13 @@ function Logo() {
 
 function Search({ onQuery, onLoading, onError, onNewQuery }) {
   const [query, setQuery] = useState("");
+  const inputElement = useRef(null);
+
+  useKey("Enter", () => {
+    if (document.activeElement === inputElement.current) return;
+    inputElement.current.focus();
+    setQuery("");
+  });
 
   useEffect(
     function () {
@@ -67,7 +75,7 @@ function Search({ onQuery, onLoading, onError, onNewQuery }) {
         controller.abort();
       };
     },
-    [query, onLoading, onQuery, onError]
+    [query, onLoading, onQuery, onError, onNewQuery]
   );
 
   return (
@@ -80,6 +88,7 @@ function Search({ onQuery, onLoading, onError, onNewQuery }) {
         onChange={(e) => {
           setQuery(e.target.value);
         }}
+        ref={inputElement}
       />
     </>
   );

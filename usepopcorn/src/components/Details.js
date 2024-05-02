@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Loader } from "./Loader";
 import StarRating from "./StarRating";
+import useKey from "./useKey";
 
 export default function Details({
   movie,
@@ -10,21 +11,7 @@ export default function Details({
   watchedMovies,
   onListed,
 }) {
-  useEffect(
-    function () {
-      const callback = (e) => {
-        console.log(e.code);
-        if (e.code === "Escape") onBack(null);
-      };
-
-      document.addEventListener("keydown", callback);
-
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [movie, onBack]
-  );
+  useKey("Escape", () => onBack(null));
 
   return !loaded ? (
     <Detail
@@ -84,18 +71,19 @@ function OverView({ movie }) {
 
 function Section({ movie, onWatched, onListed, watchedMovies }) {
   const [rating, setRating] = useState(0);
+  const stars = useRef(0);
 
   function handleWatched() {
     onWatched((watchedMovies) => [
       ...watchedMovies,
-      { ...movie, userRating: rating },
+      { ...movie, starsDecision: stars.current, userRating: rating },
     ]);
     onListed(null);
   }
   useEffect(
     function () {
       document.title = `MOVIE | ${movie.Title} : ${rating}⭐`;
-
+      if (rating) stars.current++;
       return function () {
         document.title = "usePopcorn";
       };
@@ -107,7 +95,12 @@ function Section({ movie, onWatched, onListed, watchedMovies }) {
     <section>
       <div className="rating">
         {!watchedMovies.map((movie) => movie.imdbID).includes(movie.imdbID) ? (
-          <StarRating starsCount={10} size={24} onSetRating={setRating} />
+          <StarRating
+            starsCount={10}
+            size={24}
+            onSetRating={setRating}
+            ref={stars}
+          />
         ) : (
           <p>
             You rated this movie with{" "}
