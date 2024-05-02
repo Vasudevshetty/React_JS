@@ -23,6 +23,7 @@ function App() {
         onQuery={setMovies}
         onLoading={setSearchLoaded}
         onError={setError}
+        onNewQuery={setSelectedMovie}
       ></NavBar>
       <Main>
         <Box

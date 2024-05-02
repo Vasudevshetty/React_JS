@@ -6,11 +6,17 @@ export default function NavBar({
   onQuery,
   onLoading,
   onError,
+  onNewQuery,
 }) {
   return (
     <nav className="nav-bar">
       <Logo></Logo>
-      <Search onQuery={onQuery} onLoading={onLoading} onError={onError} />
+      <Search
+        onQuery={onQuery}
+        onLoading={onLoading}
+        onError={onError}
+        onNewQuery={onNewQuery}
+      />
       <p className="num-results">
         Found <strong>{numResults}</strong> results
       </p>
@@ -27,7 +33,7 @@ function Logo() {
   );
 }
 
-function Search({ onQuery, onLoading, onError }) {
+function Search({ onQuery, onLoading, onError, onNewQuery }) {
   const [query, setQuery] = useState("");
 
   useEffect(
@@ -54,6 +60,7 @@ function Search({ onQuery, onLoading, onError }) {
         return;
       }
 
+      onNewQuery(null);
       handleSearch();
 
       return function () {

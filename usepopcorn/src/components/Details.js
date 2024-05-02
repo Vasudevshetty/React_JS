@@ -10,6 +10,22 @@ export default function Details({
   watchedMovies,
   onListed,
 }) {
+  useEffect(
+    function () {
+      const callback = (e) => {
+        console.log(e.code);
+        if (e.code === "Escape") onBack(null);
+      };
+
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [movie, onBack]
+  );
+
   return !loaded ? (
     <Detail
       movie={movie}
@@ -25,6 +41,7 @@ export default function Details({
 
 function Detail({ movie, onBack, onWatched, onListed, watchedMovies }) {
   if (!movie) return;
+
   return (
     <div className="details">
       <Header movie={movie} onBack={onBack} />

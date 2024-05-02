@@ -60,7 +60,6 @@ function Movie({ type, movie, onSelect, onLoading, onDelete, onError }) {
     <li onClick={() => handleSelect()}>
       <img src={movie.Poster} alt={movie.Title + "poster"} />
       <h3>{movie.Title}</h3>
-      {console.log(type)}
       <div>
         {type === "queryMovies" && (
           <p>
