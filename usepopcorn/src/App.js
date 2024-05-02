@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Main } from "./components/Main";
 import Details from "./components/Details";
 import { WatchedMovies } from "./components/WatchedMovies";
-import { Movies } from "./components/Movies";
 import Box from "./components/Box";
+import { Movies } from "./components/Movies";
 import { Error } from "./components/Loader";
 
 function App() {
@@ -30,11 +30,12 @@ function App() {
           movies={movies}
           className="list-movies"
           onSelect={setSelectedMovie}
+          loaded={searchLoaded}
           onLoading={setDetailLoaded}
           onError={setError}
           error={error}
         >
-          <Movies movies={movies} loaded={searchLoaded}></Movies>
+          <Movies movies={movies} loaded={searchLoaded} />
         </Box>
         {!detailLoaded && !selectedMovie ? (
           <Box

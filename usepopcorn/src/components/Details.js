@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader } from "./Loader";
 import StarRating from "./StarRating";
 
@@ -75,6 +75,16 @@ function Section({ movie, onWatched, onListed, watchedMovies }) {
     ]);
     onListed(null);
   }
+  useEffect(
+    function () {
+      document.title = `MOVIE | ${movie.Title} : ${rating}⭐`;
+
+      return function () {
+        document.title = "usePopcorn";
+      };
+    },
+    [movie, rating]
+  );
 
   return (
     <section>

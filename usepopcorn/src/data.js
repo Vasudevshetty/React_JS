@@ -4,9 +4,9 @@ export const searchURL = (title) =>
 export const selectURL = (id) =>
   `https://www.omdbapi.com/?apikey=${KEY}&i=${id}`;
 
-export async function getJSON(url) {
+export async function getJSON(url, controller = null) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: controller.signal });
     const data = await response.json();
     return data;
   } catch (err) {

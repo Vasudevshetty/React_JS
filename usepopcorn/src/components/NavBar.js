@@ -32,21 +32,33 @@ function Search({ onQuery, onLoading, onError }) {
 
   useEffect(
     function () {
+      const controller = new AbortController();
       async function handleSearch() {
         try {
           onLoading(true);
-          const data = await getJSON(searchURL(query));
-          if (!data) return;
+          onError("");
+          const data = await getJSON(searchURL(query), controller);
+          if (data.Response === "False") throw new Error(data.Error);
           onLoading(false);
           onQuery(data.Search);
         } catch (err) {
-          onError(err.message);
+          if (err.name !== "AbortError") onError(err.message);
         } finally {
           onLoading(false);
         }
       }
 
+      if (query.length < 3) {
+        onQuery([]);
+        onError("");
+        return;
+      }
+
       handleSearch();
+
+      return function () {
+        controller.abort();
+      };
     },
     [query, onLoading, onQuery, onError]
   );

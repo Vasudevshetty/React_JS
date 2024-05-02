@@ -8,6 +8,7 @@ export default function Box({
   movies = null,
   onSelect,
   onLoading,
+  loaded,
   onDelete,
   className,
   children,
@@ -32,6 +33,7 @@ export default function Box({
                 className={className}
                 onDelete={onDelete}
                 onError={onError}
+                loaded={loaded}
               />
             )
           ) : (

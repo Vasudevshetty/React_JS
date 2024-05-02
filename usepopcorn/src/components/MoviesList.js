@@ -8,6 +8,7 @@ export default function MoviesList({
   onDelete,
   className,
   onLoading,
+  loaded,
   onError,
 }) {
   function handleDelete(movie) {
@@ -17,20 +18,22 @@ export default function MoviesList({
   }
 
   return (
-    <ul className={`list ${className}`}>
-      {movies?.map((movie) => (
-        <Movie
-          type={type}
-          movie={movie}
-          key={movie.imdbID}
-          onSelect={onSelect}
-          onReselect={onReselect}
-          onLoading={onLoading}
-          onDelete={handleDelete}
-          onError={onError}
-        />
-      ))}
-    </ul>
+    !loaded && (
+      <ul className={`list ${className}`}>
+        {movies?.map((movie) => (
+          <Movie
+            type={type}
+            movie={movie}
+            key={movie.imdbID}
+            onSelect={onSelect}
+            onReselect={onReselect}
+            onLoading={onLoading}
+            onDelete={handleDelete}
+            onError={onError}
+          />
+        ))}
+      </ul>
+    )
   );
 }
 
@@ -39,6 +42,7 @@ function Movie({ type, movie, onSelect, onLoading, onDelete, onError }) {
     if (type !== "queryMovies") return;
     try {
       onLoading(true);
+      onError("");
       const data = await getJSON(selectURL(movie.imdbID));
       if (!data) return;
       onLoading(false);
