@@ -1,4 +1,4 @@
-import TabbedContent from "./TabbedContent";
+import DateCounter from "./DateCounter";
 
 export const messages = [
   "Learn React ⚛️",
@@ -9,7 +9,7 @@ export const messages = [
 export default function App() {
   return (
     <div>
-      <TabbedContent></TabbedContent>
+      <DateCounter></DateCounter>
     </div>
   );
 }
