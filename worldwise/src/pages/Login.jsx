@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./styles/Login.module.scss";
+import PageNav from "../components/PageNav";
 
 function Login() {
   const [email, setEmail] = useState("vasu@example.com");
@@ -7,6 +8,7 @@ function Login() {
 
   return (
     <main className={styles.login}>
+      <PageNav />
       <form className={styles.form}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
