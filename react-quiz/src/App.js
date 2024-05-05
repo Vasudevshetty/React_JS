@@ -1,6 +1,9 @@
 import { useEffect, useReducer } from "react";
 import Header from "./Header";
 import Main from "./Main";
+import Loader from "./Loader";
+import Error from "./Error";
+import StartScreen from "./StartScreen";
 
 const initialState = {
   questions: [],
@@ -10,9 +13,11 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "dataFetched":
-      return { ...state, questions: action.payload };
+      return { ...state, questions: action.payload, status: "ready" };
+    case "dataFailed":
+      return { ...state, status: "error" };
     default:
-      throw new Error("Something went wrong.");
+      throw new Error("Something went wrong. Action unknown");
   }
 }
 
@@ -27,7 +32,7 @@ function App() {
 
         dispatch({ type: "dataFetched", payload: data });
       } catch (err) {
-        console.log(err.message);
+        dispatch({ type: "dataFailed" });
       }
     }
     loadQuestion();
@@ -36,7 +41,13 @@ function App() {
   return (
     <div className="app">
       <Header></Header>
-      <Main></Main>
+      <Main>
+        {state.status === "loading" && <Loader />}
+        {state.status === "error" && <Error />}
+        {state.status === "ready" && (
+          <StartScreen length={state.questions.length} />
+        )}
+      </Main>
     </div>
   );
 }
