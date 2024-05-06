@@ -1,6 +1,6 @@
 import Logo from "../components/Logo";
 import styles from "./styles/PageNav.module.scss";
-import { PageLink } from "./PageLink";
+import PageLink from "./PageLink";
 
 function PageNav() {
   return (

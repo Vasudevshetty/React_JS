@@ -1,5 +1,5 @@
 import styles from "./styles/AppNav.module.scss";
-import { PageLink } from "./PageLink";
+import PageLink from "./PageLink";
 
 function AppNav() {
   return (
