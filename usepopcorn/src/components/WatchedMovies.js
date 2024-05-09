@@ -1,7 +1,7 @@
 import { Stats } from "./MoviesList";
 
 const average = (array) =>
-  array.length
+  array?.length
     ? (
         array.reduce((acc, curr) => (acc = acc + curr), 0) / array.length
       ).toFixed(2)
@@ -13,11 +13,11 @@ export function WatchedMovies({ watchedMovies }) {
 
 function Summary({ watchedMovies }) {
   const imdbAvg = average(
-    watchedMovies.map((movie) => parseFloat(movie.imdbRating))
+    watchedMovies?.map((movie) => parseFloat(movie.imdbRating))
   );
-  const userAvg = average(watchedMovies.map((movie) => movie.userRating));
+  const userAvg = average(watchedMovies?.map((movie) => movie.userRating));
   const runtimeAvg = average(
-    watchedMovies.map((movie) => parseFloat(movie.Runtime.split(" ").at(0)))
+    watchedMovies?.map((movie) => parseFloat(movie.Runtime.split(" ").at(0)))
   );
 
   return (
@@ -26,7 +26,7 @@ function Summary({ watchedMovies }) {
       <div>
         <p>
           <span>#️⃣</span>
-          <span>{watchedMovies.length} movies</span>
+          <span>{watchedMovies?.length} movies</span>
         </p>
         <Stats imdb={imdbAvg} user={userAvg} runtime={runtimeAvg + " min"} />
       </div>

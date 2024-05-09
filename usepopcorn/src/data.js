@@ -1,6 +1,6 @@
 const KEY = "2363428c";
 export const searchURL = (title) =>
-  `http://www.omdbapi.com/?apikey=${KEY}&s=${title}`;
+  `https://www.omdbapi.com/?apikey=${KEY}&s=${title}`;
 export const selectURL = (id) =>
   `https://www.omdbapi.com/?apikey=${KEY}&i=${id}`;
 

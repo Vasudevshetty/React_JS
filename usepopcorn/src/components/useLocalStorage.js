@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 export default function useLocalStorage() {
-  const [watchedMovies, setWatchedMovies] = useState(() =>
-    JSON.parse(localStorage.getItem("watchedMovies"))
+  const [watchedMovies, setWatchedMovies] = useState(
+    () => JSON.parse(localStorage.getItem("watchedMovies")) && null
   );
   useEffect(
     function () {

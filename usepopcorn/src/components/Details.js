@@ -74,10 +74,14 @@ function Section({ movie, onWatched, onListed, watchedMovies }) {
   const stars = useRef(0);
 
   function handleWatched() {
-    onWatched((watchedMovies) => [
-      ...watchedMovies,
-      { ...movie, starsDecision: stars.current, userRating: rating },
-    ]);
+    onWatched((watchedMovies) =>
+      watchedMovies
+        ? [
+            ...watchedMovies,
+            { ...movie, starsDecision: stars.current, userRating: rating },
+          ]
+        : [{ ...movie, starsDecision: stars.current, userRating: rating }]
+    );
     onListed(null);
   }
   useEffect(
@@ -94,13 +98,13 @@ function Section({ movie, onWatched, onListed, watchedMovies }) {
   return (
     <section>
       <div className="rating" ref={stars}>
-        {!watchedMovies.map((movie) => movie.imdbID).includes(movie.imdbID) ? (
+        {!watchedMovies?.map((movie) => movie.imdbID).includes(movie.imdbID) ? (
           <StarRating starsCount={10} size={24} onSetRating={setRating} />
         ) : (
           <p>
             You rated this movie with{" "}
             {
-              watchedMovies.find(
+              watchedMovies?.find(
                 (watchedMovie) => watchedMovie.imdbID === movie.imdbID
               )?.userRating
             }
