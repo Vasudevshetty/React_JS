@@ -9,7 +9,6 @@ function ButtonBack() {
       type="back"
       onClick={(e) => {
         e.preventDefault();
-        console.log("hello");
         navigate(-1);
       }}
     >

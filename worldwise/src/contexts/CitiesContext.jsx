@@ -4,7 +4,7 @@ const CitiesContext = createContext();
 
 function CitiesProvider({ children }) {
   const [cities, setCities] = useState([]);
-  const [currentyCity, setCurrentCity] = useState({});
+  const [currentCity, setCurrentCity] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   async function loadCity(id) {
@@ -41,7 +41,7 @@ function CitiesProvider({ children }) {
       value={{
         cities,
         isLoading,
-        currentyCity,
+        currentCity,
         loadCity,
       }}
     >

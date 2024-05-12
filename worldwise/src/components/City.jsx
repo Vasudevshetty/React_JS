@@ -15,15 +15,16 @@ const fromatDate = (date) =>
 
 function City() {
   const { id } = useParams();
-  const { currentyCity, loadCity, isLoading } = useContext(CitiesContext);
+  const { currentCity, loadCity, isLoading } = useContext(CitiesContext);
 
   useEffect(() => {
     loadCity(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) return <Spinner />;
 
-  const { cityName, emoji, date, notes } = currentyCity;
+  const { cityName, emoji, date, notes } = currentCity;
 
   return (
     <div className={styles.city}>
