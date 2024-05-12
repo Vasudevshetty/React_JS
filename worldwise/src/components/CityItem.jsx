@@ -15,8 +15,6 @@ function CityItem({ city }) {
   const { cityName, emoji, date, id, position } = city;
   const { currentCity } = useContext(CitiesContext);
 
-  console.log(currentCity);
-
   return (
     <li>
       <Link
