@@ -10,7 +10,7 @@
         "lat": 38.727881642324164,
         "lng": -9.140900099907554
       },
-      "id": 73930385
+      "id": "73930385"
     },
     {
       "cityName": "Madrid",
@@ -22,7 +22,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 17806751
+      "id": "17806751"
     },
     {
       "cityName": "Berlin",
@@ -34,7 +34,79 @@
         "lat": 52.53586782505711,
         "lng": 13.376933665713324
       },
-      "id": 98443197
+      "id": "98443197"
+    },
+    {
+      "id": "46da",
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-15T19:28:40.036Z",
+      "notes": "dsafasd",
+      "position": {
+        "lat": "40.00803680770588",
+        "lng": "-0.015634807595767963"
+      }
+    },
+    {
+      "id": "bf5b",
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-15T19:29:34.839Z",
+      "notes": "",
+      "position": {
+        "lat": "40.009090705955934",
+        "lng": "-0.02782353935336879"
+      }
+    },
+    {
+      "id": "c0bd",
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-15T19:30:55.081Z",
+      "notes": "",
+      "position": {
+        "lat": "40.009090705955934",
+        "lng": "-0.02782353935336879"
+      }
+    },
+    {
+      "id": "4997",
+      "cityName": "Turukhansk",
+      "country": "Russian Federation (the)",
+      "emoji": "🇷🇺",
+      "date": "2024-05-15T19:31:40.098Z",
+      "notes": "",
+      "position": {
+        "lat": "64.4998108922337",
+        "lng": "87.52218076376155"
+      }
+    },
+    {
+      "id": "1879",
+      "cityName": "Los Rabanos",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-15T19:32:18.936Z",
+      "notes": "",
+      "position": {
+        "lat": "41.65696306223278",
+        "lng": "-2.4394973515685603"
+      }
+    },
+    {
+      "id": "2e04",
+      "cityName": "Cangas del Narcea",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-15T19:32:22.998Z",
+      "notes": "",
+      "position": {
+        "lat": "43.16548880027008",
+        "lng": "-6.63589327111364"
+      }
     }
   ]
 }

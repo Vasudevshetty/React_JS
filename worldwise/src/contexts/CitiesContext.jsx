@@ -19,6 +19,24 @@ function CitiesProvider({ children }) {
     }
   }
 
+  async function createCity(newCity) {
+    try {
+      setIsLoading(true);
+      const resp = await fetch(`http://localhost:8000/cities/`, {
+        method: "post",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await resp.json();
+      setIsLoading(false);
+      setCities((cities) => [...cities, data]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     async function loadCities() {
       try {
@@ -43,6 +61,7 @@ function CitiesProvider({ children }) {
         isLoading,
         currentCity,
         loadCity,
+        createCity,
       }}
     >
       {children}

@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./styles/Form.module.scss";
 import Button from "./Button";
 import ButtonBack from "./ButtonBack";
 import { useNavigate } from "react-router-dom";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import DatePicker from "react-datepicker";
 import Message from "./Message";
+import "react-datepicker/dist/react-datepicker.css";
+import { CitiesContext } from "../contexts/CitiesContext";
 
-export function convertToEmoji(countryCode) {
+function convertToEmoji(countryCode) {
   const codePoints = countryCode
     .toUpperCase()
     .split("")
@@ -16,6 +19,7 @@ export function convertToEmoji(countryCode) {
 }
 
 function Form() {
+  const { createCity, isLoading } = useContext(CitiesContext);
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
@@ -30,6 +34,7 @@ function Form() {
 
   useEffect(() => {
     async function fetchCity() {
+      if (!lat && !lng) return;
       try {
         setPosLoading(true);
         setGeoError("");
@@ -44,9 +49,9 @@ function Form() {
             "That doesnt seems to be a city. Click somewhere else."
           );
 
-        setCityName(data.city || data.locality);
-        setCountry(data.country);
         console.log(data);
+        setCityName(data.city || data.locality);
+        setCountry(data.countryName);
         setEmoji(convertToEmoji(data.countryCode));
       } catch (err) {
         setGeoError(err.message);
@@ -57,10 +62,33 @@ function Form() {
     fetchCity();
   }, [lat, lng]);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!cityName || !date) return;
+    console.log(country);
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+    };
+    createCity(newCity);
+    if (!isLoading) navigate("../cities");
+  }
+
   if (geoError) return <Message message={geoError} />;
+  if (!lat && !lng)
+    return <Message message="Start by clicking somewhere on the map." />;
 
   return (
-    <form className={styles.form}>
+    <form
+      className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+      onSubmit={handleSubmit}
+    >
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -73,10 +101,11 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        <DatePicker
           id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+          onChange={(date) => setDate(date)}
+          selected={date}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
 
