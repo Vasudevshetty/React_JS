@@ -23,6 +23,30 @@
         "lat": "12.31225365591335",
         "lng": "76.61108964563941"
       }
+    },
+    {
+      "id": "c0ed",
+      "cityName": "Ettaiyapuram",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2024-05-16T04:52:28.464Z",
+      "notes": "",
+      "position": {
+        "lat": "9.21290213793516",
+        "lng": "77.93560490739681"
+      }
+    },
+    {
+      "id": "12bb",
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-16T05:13:36.361Z",
+      "notes": "",
+      "position": {
+        "lat": "40.0064594315303",
+        "lng": "-0.009467580929034549"
+      }
     }
   ]
 }
