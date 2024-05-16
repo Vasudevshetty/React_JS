@@ -27,7 +27,7 @@ function Form() {
   const [emoji, setEmoji] = useState("");
 
   const navigate = useNavigate();
-  const [posLoading, setPosLoading] = useState(false);
+  const [, setPosLoading] = useState(false);
   const [geoError, setGeoError] = useState("");
 
   const [lat, lng] = useUrlPosition();
