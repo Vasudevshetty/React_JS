@@ -1,3 +1,40 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "7016",
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-20T14:01:27.555Z",
+      "notes": "",
+      "position": {
+        "lat": "40.000136472792335",
+        "lng": "-0.03219008790060985"
+      }
+    },
+    {
+      "id": "9cca",
+      "cityName": "Mysore",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2024-05-20T14:05:08.231Z",
+      "notes": "",
+      "position": {
+        "lat": "12.283448841900338",
+        "lng": "76.6601499697215"
+      }
+    },
+    {
+      "id": "c552",
+      "cityName": "Mysore",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2024-05-20T14:05:39.118Z",
+      "notes": "",
+      "position": {
+        "lat": "12.28197280220838",
+        "lng": "76.67458608885553"
+      }
+    }
+  ]
 }

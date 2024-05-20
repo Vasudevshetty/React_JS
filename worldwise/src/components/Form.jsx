@@ -65,7 +65,6 @@ function Form() {
     e.preventDefault();
 
     if (!cityName || !date) return;
-    console.log(country);
 
     const newCity = {
       cityName,
