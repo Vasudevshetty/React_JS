@@ -51,7 +51,7 @@ function PostProvider({ children }) {
 }
 
 function usePosts() {
-  const context = useContext();
+  const context = useContext(PostContext);
   if (context === undefined)
     throw new Error("context was used out of provider");
   return context;
