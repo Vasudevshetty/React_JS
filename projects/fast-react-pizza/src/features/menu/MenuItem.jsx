@@ -12,7 +12,6 @@ function MenuItem({ pizza }) {
 
   const currentQuantity = useSelector(getCurrentQuantityById(id));
   const isInCart = currentQuantity > 0;
-  console.log(currentQuantity);
 
   function handleAddToCart() {
     const newItem = {
@@ -47,7 +46,7 @@ function MenuItem({ pizza }) {
           )}
 
           {isInCart && (
-            <div className="flex item-center gap-3 sm:gap-8">
+            <div className="item-center flex gap-3 sm:gap-8">
               <UpdateItemsQuantity
                 pizzaId={id}
                 currentQuantity={currentQuantity}
