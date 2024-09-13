@@ -9,3 +9,5 @@ and the wild oasis project is to be done soon.
 
 next js will be added upon completion of reactjs.
 should work on wild oasis a part is pending there
+
+Should optmise way more in the project, shoul dmaster the complete mern stack asap.
