@@ -11,3 +11,5 @@ next js will be added upon completion of reactjs.
 should work on wild oasis a part is pending there
 
 Should optmise way more in the project, shoul dmaster the complete mern stack asap.
+
+should work on socket io and related topics
